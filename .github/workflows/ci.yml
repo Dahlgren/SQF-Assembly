@@ -3,6 +3,27 @@ name: CI
 on: [push, pull_request]
 
 jobs:
+  linux:
+    name: Linux (x64)
+    runs-on: ubuntu-20.04
+    steps:
+      - name: Git checkout
+        uses: actions/checkout@v2
+        with:
+          submodules: recursive
+
+      - name: Dependencies
+        run: sudo apt-get install -y g++-multilib
+
+      - name: Build
+        run: mkdir build && cd build && cmake .. && cmake --build . --parallel 2
+
+      - name: Upload Linux x64 binaries
+        uses: actions/upload-artifact@v2
+        with:
+          name: Linux (x64)
+          path: build/**/Release/*.so
+
   windows:
     name: Windows (${{ matrix.arch }})
     runs-on: windows-2019

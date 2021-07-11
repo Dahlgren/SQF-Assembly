@@ -6,6 +6,11 @@
 #include <functional>
 #include <optional>
 
+#if not defined(_MSC_VER)
+#include <signal.h>
+#define __debugbreak() raise(SIGTRAP)
+#endif
+
 using namespace std::string_view_literals;
 using namespace intercept;
 using namespace intercept::types;
