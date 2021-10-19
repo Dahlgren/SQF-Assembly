@@ -3,6 +3,7 @@ cmake_minimum_required (VERSION 3.0)
 set(INTERCEPT_CLIENT_PATH "${CMAKE_SOURCE_DIR}/intercept/src/client")
 
 set(LIBRARY_PATH_ZSTD "${CMAKE_SOURCE_DIR}/ArmaScriptCompiler/lib/zstd")
+set(LIBRARY_PATH_LZO "${CMAKE_SOURCE_DIR}/ArmaScriptCompiler/lib/lzokay")
 
 set(INTERCEPT_INCLUDE_PATH 
 "${INTERCEPT_CLIENT_PATH}/headers"
@@ -45,7 +46,7 @@ set(library_sources ${INTERCEPT_SQFASM_SOURCES})
 
 add_library( ${INTERCEPT_PLUGIN_NAME} SHARED ${library_sources} ${INTERCEPT_SOURCES} ${INTERCEPT_SQFASM_SQF_EXT_SOURCES} ${COMPILER_SOURCES})
 
-include_directories(${CMAKE_CURRENT_SOURCE_DIR} ${INTERCEPT_INCLUDE_PATH} "${LIBRARY_PATH_ZSTD}/lib")
+include_directories(${CMAKE_CURRENT_SOURCE_DIR} ${INTERCEPT_INCLUDE_PATH} "${LIBRARY_PATH_ZSTD}/lib" ${LIBRARY_PATH_LZO})
 
 target_link_libraries(${INTERCEPT_PLUGIN_NAME} ${CMAKE_THREAD_LIBS_INIT} libzstd_static)
 
